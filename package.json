@@ -1,6 +1,6 @@
 {
   "name": "ask-openai-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI to ask OpenAI a question",
   "bin": {
     "ask": "dist/index.js"
@@ -11,8 +11,7 @@
     "test": "jest",
     "prepare": "husky install",
     "preversion": "npm run test",
-    "version": "npm run build && git add -A src",
-    "postversion": "npm run build"
+    "version": "npm run build && git add -A src"
   },
   "repository": {
     "type": "git",
