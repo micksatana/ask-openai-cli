@@ -1,0 +1,13 @@
+{
+  "extends": "@tsconfig/node16",
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+  },
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "resolveJsonModule": true
+  },
+  "exclude": ["**/__mocks__", "**/__tests__"]
+}
