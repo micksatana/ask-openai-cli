@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: ${{ env.node_version }}
 
+      - name: Install node modules
+        shell: bash
+        run: npm i
+
       - name: Test
         shell: bash
         run: npm run test
