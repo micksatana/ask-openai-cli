@@ -1,6 +1,6 @@
 {
   "name": "ask-openai-cli",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "CLI to ask OpenAI a question",
   "bin": {
     "ask": "dist/index.js"
@@ -20,10 +20,12 @@
   },
   "homepage": "https://github.com/micksatana/poc-openai#readme",
   "dependencies": {
+    "@types/prompt-sync": "4.2.0",
     "commander": "10.0.0",
     "dotenv-flow": "3.2.0",
     "envalid": "7.3.1",
-    "openai": "3.1.0"
+    "openai": "3.1.0",
+    "prompt-sync": "4.2.0"
   },
   "devDependencies": {
     "@types/axios": "0.14.0",
