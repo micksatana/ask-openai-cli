@@ -10,6 +10,8 @@
     "ask": "ts-node src/index.ts",
     "test": "jest",
     "prepare": "husky install",
+    "preversion": "npm run test",
+    "version": "npm run build && git add -A src",
     "postversion": "npm run build"
   },
   "repository": {
