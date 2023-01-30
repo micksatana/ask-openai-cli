@@ -9,7 +9,8 @@
     "build": "shx echo \"export default '$npm_package_version';\" > ./src/version.ts && tsc && shx chmod 755 ./dist/index.js",
     "ask": "ts-node src/index.ts",
     "test": "jest",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postversion": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,6 @@
   },
   "homepage": "https://github.com/micksatana/poc-openai#readme",
   "dependencies": {
-    "@types/prompt-sync": "4.2.0",
     "commander": "10.0.0",
     "dotenv-flow": "3.2.0",
     "envalid": "7.3.1",
@@ -37,6 +37,7 @@
     "@types/dotenv-flow": "3.2.0",
     "@types/jest": "29.4.0",
     "@types/node": "18.11.18",
+    "@types/prompt-sync": "4.2.0",
     "husky": "^8.0.3",
     "jest": "29.4.1",
     "semantic-release": "20.1.0",
