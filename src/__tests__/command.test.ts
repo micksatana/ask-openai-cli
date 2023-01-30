@@ -1,5 +1,7 @@
 import version from '../version';
-import answer from '../openai/__mocks__/data/create-completion.json';
+import responseData from '../openai/__mocks__/data/create-completion.json';
+import { DefaultMaxTokens, DefaultTemperature } from '../env';
+import { MaxTokensDescription, TemperatureDescription } from '../init-sync';
 
 jest.spyOn(console, 'log').mockReturnValue(undefined);
 const command = {
@@ -13,12 +15,13 @@ const command = {
   args: []
 };
 const Command = jest.fn(() => command);
-const ask = jest.fn(() => Promise.resolve(answer));
+const ask = jest.fn(() => Promise.resolve(responseData));
 
 jest.mock('commander', () => ({
   Command
 }));
 jest.mock('../openai/ask', () => ({ ask }));
+jest.mock('../init-sync');
 
 describe('getCommand', () => {
   beforeAll(async () => {
@@ -26,25 +29,36 @@ describe('getCommand', () => {
     getCommand();
   });
 
+  it('has init option', () => {
+    expect(command.option).toHaveBeenNthCalledWith(
+      1,
+      '-i, --init',
+      expect.anything()
+    );
+  });
+
   it('has model option', () => {
-    expect(command.option).toBeCalledWith(
+    expect(command.option).toHaveBeenNthCalledWith(
+      2,
       '-m, --model <string>',
       expect.anything()
     );
   });
 
-  it('has temperature option with a correct parser', () => {
-    expect(command.option).toBeCalledWith(
-      '-T, --temperature <number>',
-      expect.anything(),
+  it('has max-tokens option with a correct parser', () => {
+    expect(command.option).toHaveBeenNthCalledWith(
+      3,
+      '-t, --max-tokens <number>',
+      `${MaxTokensDescription} Default is ${DefaultMaxTokens}.`,
       Number.parseFloat
     );
   });
 
-  it('has max-tokens option with a correct parser', () => {
-    expect(command.option).toBeCalledWith(
-      '-t, --max-tokens <number>',
-      expect.anything(),
+  it('has temperature option with a correct parser', () => {
+    expect(command.option).toHaveBeenNthCalledWith(
+      4,
+      '-T, --temperature <number>',
+      `${TemperatureDescription} Default is ${DefaultTemperature}.`,
       Number.parseFloat
     );
   });
@@ -101,7 +115,7 @@ describe('askCommand', () => {
         });
 
         it('log with the text of the first choice', () => {
-          expect(console.log).toBeCalledWith(answer.choices[0].text);
+          expect(console.log).toBeCalledWith(responseData.choices[0].text);
           expect(command.help).not.toBeCalled();
         });
       });

@@ -2,7 +2,7 @@
   "extends": "@tsconfig/node16",
   "ts-node": {
     "transpileOnly": true,
-    "files": true,
+    "files": true
   },
   "compilerOptions": {
     "baseUrl": "./src",
