@@ -1,3 +1,18 @@
+## [1.0.1](https://github.com/micksatana/ask-openai-cli/compare/v1.0.0...v1.0.1) (2023-06-07)
+
+
+### Bug Fixes
+
+* add setup-node to install deps before semantic-release build ([99fb1de](https://github.com/micksatana/ask-openai-cli/commit/99fb1de554e846bb930c786100600a0aaf9f117e))
+* commitlint rules max length blocking changelog ([96cd6f2](https://github.com/micksatana/ask-openai-cli/commit/96cd6f2bbde91f5cb658b3a86380df814c8f9fdc))
+* version to align with tag ([8e5e476](https://github.com/micksatana/ask-openai-cli/commit/8e5e47692a61c1f7453dcd986354aab76ffa1f34))
+* **version:** release configuration ([0a5d076](https://github.com/micksatana/ask-openai-cli/commit/0a5d07622f8cef646eca3843219cd6b4ebd9c990))
+
+
+### Reverts
+
+* version ([56c826c](https://github.com/micksatana/ask-openai-cli/commit/56c826ca3b822af6836b178c7dcde21083b7e61b))
+
 # 1.0.0 (2023-06-07)
 
 
