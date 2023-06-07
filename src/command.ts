@@ -9,6 +9,7 @@ import {
   ModelDescription,
   TemperatureDescription
 } from './init-sync';
+import { NotEnoughMaxTokens } from './errors';
 
 let command: Command;
 
@@ -64,6 +65,10 @@ export const askCommand = async () => {
     const data = await ask(command.args.join(' '), options);
 
     console.log(data.choices[0].text);
+
+    if (data.choices[0].finish_reason === 'length') {
+      console.log(`\n\n${NotEnoughMaxTokens}`);
+    }
   } else {
     command.help();
   }

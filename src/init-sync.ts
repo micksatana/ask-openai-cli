@@ -14,6 +14,9 @@ export const TemperatureDescription =
 
 export const initSync = () => {
   const prompt = PromptSync();
+  const orgId = prompt('OpenAI Organization ID: ', {
+    echo: '*'
+  });
   const apiKey = prompt('OpenAI API Key: ', {
     echo: '*'
   });
@@ -31,7 +34,8 @@ export const initSync = () => {
       `OPENAI_API_KEY=${apiKey}`,
       `OPENAI_DEFAULT_MODEL=${model}`,
       `OPENAI_DEFAULT_TEMPERATURE=${temperature}`,
-      `OPENAI_DEFAULT_MAX_TOKENS=${maxTokens}`
+      `OPENAI_DEFAULT_MAX_TOKENS=${maxTokens}`,
+      `OPENAI_ORG_ID=${orgId}`
     ].join(EOL)
   );
 

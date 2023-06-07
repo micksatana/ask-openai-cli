@@ -12,7 +12,8 @@ export const getEnv = () => {
       OPENAI_API_KEY: str(),
       OPENAI_DEFAULT_MAX_TOKENS: num({ default: DefaultMaxTokens }),
       OPENAI_DEFAULT_MODEL: str({ default: DefaultModel }),
-      OPENAI_DEFAULT_TEMPERATURE: num({ default: DefaultTemperature })
+      OPENAI_DEFAULT_TEMPERATURE: num({ default: DefaultTemperature }),
+      OPENAI_ORG_ID: str()
     });
   }
 
