@@ -20,6 +20,7 @@ describe('initSync', () => {
   });
 
   describe('when user inputs all', () => {
+    const orgId = 'testUserInputOrgId';
     const apiKey = 'testUserInputApiKey';
     const model = 'testUserInputModel';
     const maxTokens = '99';
@@ -28,6 +29,7 @@ describe('initSync', () => {
 
     beforeEach(async () => {
       prompt
+        .mockReturnValueOnce(orgId)
         .mockReturnValueOnce(apiKey)
         .mockReturnValueOnce(model)
         .mockReturnValueOnce(maxTokens)
@@ -37,11 +39,14 @@ describe('initSync', () => {
     });
 
     it('get user inputs', () => {
-      expect(prompt).toHaveBeenNthCalledWith(1, 'OpenAI API Key: ', {
+      expect(prompt).toHaveBeenNthCalledWith(1, 'OpenAI Organization ID: ', {
         echo: '*'
       });
-      expect(prompt).toHaveBeenNthCalledWith(2, 'Model ID: ');
-      expect(prompt).toHaveBeenNthCalledWith(3, 'Max Tokens: ');
+      expect(prompt).toHaveBeenNthCalledWith(2, 'OpenAI API Key: ', {
+        echo: '*'
+      });
+      expect(prompt).toHaveBeenNthCalledWith(3, 'Model ID: ');
+      expect(prompt).toHaveBeenNthCalledWith(4, 'Max Tokens: ');
     });
 
     it('generate .env file', () => {
@@ -54,7 +59,8 @@ describe('initSync', () => {
           `OPENAI_API_KEY=${apiKey}`,
           `OPENAI_DEFAULT_MODEL=${model}`,
           `OPENAI_DEFAULT_TEMPERATURE=${temperature}`,
-          `OPENAI_DEFAULT_MAX_TOKENS=${maxTokens}`
+          `OPENAI_DEFAULT_MAX_TOKENS=${maxTokens}`,
+          `OPENAI_ORG_ID=${orgId}`
         ].join(EOL)
       );
     });
@@ -65,6 +71,7 @@ describe('initSync', () => {
 
     beforeEach(async () => {
       prompt
+        .mockReturnValueOnce('')
         .mockReturnValueOnce('')
         .mockReturnValueOnce('')
         .mockReturnValueOnce('')
@@ -80,7 +87,8 @@ describe('initSync', () => {
           `OPENAI_API_KEY=`,
           `OPENAI_DEFAULT_MODEL=${DefaultModel}`,
           `OPENAI_DEFAULT_TEMPERATURE=${DefaultTemperature}`,
-          `OPENAI_DEFAULT_MAX_TOKENS=${DefaultMaxTokens}`
+          `OPENAI_DEFAULT_MAX_TOKENS=${DefaultMaxTokens}`,
+          `OPENAI_ORG_ID=`
         ].join(EOL)
       );
     });

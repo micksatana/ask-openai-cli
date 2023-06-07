@@ -1,0 +1,19 @@
+{
+  "id": "cmpl-7OfYXfNi2DjfDaEFzAMsBvb1ocUWn",
+  "object": "text_completion",
+  "created": 1686113969,
+  "model": "text-davinci-003",
+  "choices": [
+    {
+      "text": "\n\nA dog has four legs.",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 6,
+    "completion_tokens": 8,
+    "total_tokens": 14
+  }
+}

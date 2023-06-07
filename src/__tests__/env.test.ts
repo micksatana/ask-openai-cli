@@ -24,11 +24,13 @@ describe('getEnv', () => {
       OPENAI_API_KEY: 'mocked',
       OPENAI_DEFAULT_MAX_TOKENS: 1,
       OPENAI_DEFAULT_MODEL: 'mocked',
-      OPENAI_DEFAULT_TEMPERATURE: 1
+      OPENAI_DEFAULT_TEMPERATURE: 1,
+      OPENAI_ORG_ID: 'mocked'
     });
     expect(str).toHaveBeenNthCalledWith(1); // OPENAI_API_KEY
     expect(num).toHaveBeenNthCalledWith(1, { default: DefaultMaxTokens }); // OPENAI_DEFAULT_MAX_TOKENS
     expect(str).toHaveBeenNthCalledWith(2, { default: DefaultModel }); // OPENAI_DEFAULT_MODEL
     expect(num).toHaveBeenNthCalledWith(2, { default: DefaultTemperature }); // OPENAI_DEFAULT_TEMPERATURE
+    expect(str).toHaveBeenNthCalledWith(3); // OPENAI_ORG_ID
   });
 });

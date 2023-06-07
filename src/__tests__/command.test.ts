@@ -1,7 +1,9 @@
 import version from '../version';
-import responseData from '../openai/__mocks__/data/create-completion.json';
+import insufficientMaxTokens from '../openai/__mocks__/data/insufficient-max-tokens.json';
+import enoughMaxTokens from '../openai/__mocks__/data/enough-max-tokens.json';
 import { DefaultMaxTokens, DefaultTemperature } from '../env';
 import { MaxTokensDescription, TemperatureDescription } from '../init-sync';
+import { NotEnoughMaxTokens } from '../errors';
 
 jest.spyOn(console, 'log').mockReturnValue(undefined);
 const command = {
@@ -15,7 +17,7 @@ const command = {
   args: []
 };
 const Command = jest.fn(() => command);
-const ask = jest.fn(() => Promise.resolve(responseData));
+const ask = jest.fn(() => Promise.resolve(enoughMaxTokens));
 
 jest.mock('commander', () => ({
   Command
@@ -109,28 +111,46 @@ describe('askCommand', () => {
           askCommand();
         });
 
-        it('called with correct args and options', () => {
-          expect(ask).toBeCalledWith(command.args.join(' '), options);
-          expect(command.help).not.toBeCalled();
+        describe('and finish successfully', () => {
+          it('called with correct args and options', () => {
+            expect(ask).toBeCalledWith(command.args.join(' '), options);
+            expect(command.help).not.toBeCalled();
+          });
+
+          it('log with the text of the first choice', () => {
+            expect(console.log).toBeCalledWith(enoughMaxTokens.choices[0].text);
+            expect(command.help).not.toBeCalled();
+          });
         });
 
-        it('log with the text of the first choice', () => {
-          expect(console.log).toBeCalledWith(responseData.choices[0].text);
-          expect(command.help).not.toBeCalled();
+        describe('and finish early because of max tokens not enough', () => {
+          beforeEach(async () => {
+            ask.mockResolvedValueOnce(insufficientMaxTokens);
+          });
+
+          it('log with the text of the first choice', () => {
+            expect(console.log).toBeCalledWith(enoughMaxTokens.choices[0].text);
+            expect(command.help).not.toBeCalled();
+          });
+
+          it('log with a warning message', () => {
+            expect(console.log).toBeCalledWith(`\n\n${NotEnoughMaxTokens}`);
+            expect(command.help).not.toBeCalled();
+          });
         });
-      });
 
-      describe('and failed to get response from OpenAI', () => {
-        const error = new Error('Failed to get response');
-        let askCommand;
+        describe('and failed to get response from OpenAI', () => {
+          const error = new Error('Failed to get response');
+          let askCommand;
 
-        beforeEach(async () => {
-          ask.mockRejectedValueOnce(error);
-          askCommand = (await import('../command')).askCommand;
-        });
+          beforeEach(async () => {
+            ask.mockRejectedValueOnce(error);
+            askCommand = (await import('../command')).askCommand;
+          });
 
-        it('throw the error', async () => {
-          await expect(askCommand()).rejects.toEqual(error);
+          it('throw the error', async () => {
+            await expect(askCommand()).rejects.toEqual(error);
+          });
         });
       });
     });

@@ -1,0 +1,19 @@
+{
+  "id": "cmpl-7OfWmVZ4K2tVNXIh5vsR9QPaSNRhD",
+  "object": "text_completion",
+  "created": 1686113860,
+  "model": "text-davinci-003",
+  "choices": [
+    {
+      "text": "\n\nThis is a",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5,
+    "completion_tokens": 5,
+    "total_tokens": 10
+  }
+}
