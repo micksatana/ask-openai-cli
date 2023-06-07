@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micksatana/poc-openai.git"
+    "url": "git+https://github.com/micksatana/ask-openai-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/micksatana/poc-openai/issues"
+    "url": "https://github.com/micksatana/ask-openai-cli/issues"
   },
-  "homepage": "https://github.com/micksatana/poc-openai#readme",
+  "homepage": "https://github.com/micksatana/ask-openai-cli#readme",
   "dependencies": {
     "commander": "10.0.1",
     "dotenv-flow": "3.2.0",
